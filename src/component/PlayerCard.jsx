@@ -52,11 +52,11 @@ export const PlayerCard = ({
   };
 
   return (
-    <div className="py-7 px-10 m-10 rounded-xl border-1 border-emerald-300 bg-emerald-50 w-1/3">
-      <h2 className="text-center text-emerald-600 py-2 font-bold text-2xl">
+    <div className="py-7 px-5 md:px-10 m-1 md:m-10 rounded-xl border-1 border-emerald-300 bg-emerald-50 md:w-1/3">
+      <h2 className="text-center text-emerald-600 py-2 font-bold text-lg md:text-2xl">
         {playername}
       </h2>
-      <h4 className="text-center text-emerald-600 py-4 text-xl">
+      <h4 className="text-center text-emerald-600 py-4 text-md md:text-xl">
         {playername} Score is{" "}
         <span className="font-bold text-3xl">{score}</span>
       </h4>
@@ -68,7 +68,7 @@ export const PlayerCard = ({
           disabled={currentTurn !== playerNumber}
           className={`mt-4 px-4 py-2 rounded text-white ${
             currentTurn === playerNumber
-              ? "bg-emerald-600 hover:bg-emerald-700"
+              ? "bg-emerald-600 hover:bg-emerald-700 cursor-pointer"
               : "bg-gray-400 cursor-not-allowed"
           }`}
         >

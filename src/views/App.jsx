@@ -23,7 +23,7 @@ export const App = () => {
       <h1 className="text-center text-2xl font-bold py-5 text-emerald-700 bg-emerald-200">
         Dice Roller Game
       </h1>
-      <p className="text-center font-medium text-emerald-700 py-3">Player who will cross 25 points first wins!</p>
+      <p className="text-center font-medium text-emerald-700 py-3 ">Player who will cross 25 points first wins!</p>
 
       <div className="flex flex-col justify-center items-center gap-4 my-6">
         <div className="flex gap-2 items-center">
@@ -32,7 +32,7 @@ export const App = () => {
             placeholder="Enter Player-1 name"
             value={player1Input}
             onChange={(e) => setPlayer1Input(e.target.value)}
-            className="bg-white px-4 py-2 rounded-md w-64 border border-emerald-400"
+            className="bg-white px-4 py-2 rounded-md w-44 md:w-64 border border-emerald-400 focus:outline-none"
           />
           <button
             onClick={handleSubmitPlayer1}
@@ -48,7 +48,7 @@ export const App = () => {
             placeholder="Enter Player-2 name"
             value={player2Input}
             onChange={(e) => setPlayer2Input(e.target.value)}
-            className="bg-white px-4 py-2 rounded-md w-64 border border-emerald-400 "
+            className="bg-white px-4 py-2 rounded-md w-44 md:w-64 border border-emerald-400 focus:outline-none"
           />
           <button
             onClick={handleSubmitPlayer2}
@@ -58,8 +58,8 @@ export const App = () => {
           </button>
         </div>
       </div>
-      <p className="text-center font-bold text-emerald-600">Current Player: <span className="text-xl text-emerald-700">{currentTurn === 1 ? player1Name || "Player 1" : player2Name || "Player 2"}</span></p>
-      <div className="flex justify-center mx-20">
+      <p className="text-center font-bold text-emerald-600 py-3">Current Player: <span className="text-xl text-emerald-700">{currentTurn === 1 ? player1Name || "Player 1" : player2Name || "Player 2"}</span></p>
+      <div className="flex justify-center md:mx-20">
         <PlayerCard
           playername={player1Name || "Player 1"}
           currentTurn={currentTurn}
