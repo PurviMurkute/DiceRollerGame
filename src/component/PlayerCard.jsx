@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Dice1, Dice2, Dice3, Dice4, Dice5, Dice6 } from "lucide-react";
+import Modal from "./Model";
 
 export const PlayerCard = ({
   playername,
@@ -18,11 +19,12 @@ export const PlayerCard = ({
   const [score, setScore] = useState(0);
   const [diceValue, setDiceValue] = useState(1);
   const [isWin, setIsWin] = useState(false);
+  const [isModelOpen, setIsModelOpen] = useState(false);
 
   const DiceComponent = diceIcons[diceValue];
 
   const rollDice = () => {
-    if (currentTurn !== playerNumber) return; 
+    if (currentTurn !== playerNumber) return;
 
     const randomNum = Math.floor(Math.random() * 6) + 1;
     setDiceValue(randomNum);
@@ -33,13 +35,24 @@ export const PlayerCard = ({
   };
 
   useEffect(() => {
-    if (score >= 30) {
-      alert(`${playername} Wins!`);
+    if (score > 25) {
+      setIsWin(true);
+      setTimeout(() => {
+        setIsModelOpen(true);
+      }, 500);
     }
   }, [score]);
 
+  const handleReplay = () => {
+    setScore(0);
+    setDiceValue(1);
+    setIsWin(false);
+    setIsModelOpen(false);
+    window.location.reload();
+  };
+
   return (
-    <div className="py-5 px-10 m-10 rounded-xl border-1 border-emerald-300 bg-emerald-50 w-1/3">
+    <div className="py-7 px-10 m-10 rounded-xl border-1 border-emerald-300 bg-emerald-50 w-1/3">
       <h2 className="text-center text-emerald-600 py-2 font-bold text-2xl">
         {playername}
       </h2>
@@ -63,15 +76,18 @@ export const PlayerCard = ({
         </button>
       </div>
 
-      <button
-        onClick={() => {
-          setScore(0);
-          setDiceValue(1);
-        }}
-        className="bg-emerald-700 text-emerald-100 px-10 py-3 my-5 block mx-auto"
-      >
-        Reset
-      </button>
+      <Modal isOpen={isModelOpen} onClose={handleReplay}>
+        <h2 className="text-xl font-bold text-center py-3">Game Over</h2>
+        <p className="text-center text-xl font-bold text-emerald-700">
+          {isWin ? `${playername} Wins!🎉` : "It's a Draw!😊"}
+        </p>
+        <button
+          onClick={handleReplay}
+          className="block mx-auto bg-emerald-600 px-4 py-2 rounded-md my-5 font-medium text-white cursor-pointer"
+        >
+          Replay
+        </button>
+      </Modal>
     </div>
   );
 };
